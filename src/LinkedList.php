@@ -7,15 +7,11 @@ class LinkedList
     public function __construct (private ?Node $head = null, private ?Node $tail = null) {}
 
     public function __toString(): string {
-        return $this->head ?? "Empty Linked List";
+        return $this->head ?? "Empty Linked List" . "\n";
     }
 
     public function print(): void {
-        echo $this->head . "\n" ?? "Empty Linked List";
-    }
-
-    private function setTail(Node $node): void {
-        $this->tail = $node;
+        echo $this->head . "\n" ?? "Empty Linked List" . "\n";
     }
 
     // Add Node to start of Linked List
@@ -58,9 +54,10 @@ class LinkedList
     }
 
     // Add Node after specific position in Linked List
-    public function addNodeAfter(Node $node, int $position): LinkedList {
+    public function addNodeAfter(Node $n, int $position): LinkedList {
 
         if ( $this->head === null ) {
+            $this->head = $n;
             return $this;
         }
 
@@ -82,7 +79,7 @@ class LinkedList
             }
         }
 
-        $nodeAt->setNext($node);
+        $nodeAt->setNext($n);
         $nodeAt->getNext()->setNext($nodeAfter);
 
         return $this;
