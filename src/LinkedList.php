@@ -75,6 +75,7 @@ class LinkedList
             $nodeAfter = $nodeAfter->getNext();
 
             if ( $nodeAfter === null ) {
+                $this->append($n); // Append new node at end of Linked List if there is no other Node after $nodeAt
                 return $this;
             }
         }
