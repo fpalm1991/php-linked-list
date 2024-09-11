@@ -146,6 +146,7 @@ class LinkedList {
         return $lastNode;
     }
 
+    // Remove Node after specific position in Linked List
     public function removeNodeAfter(int $position): LinkedList {
 
         if ( $this->head === null ) {
