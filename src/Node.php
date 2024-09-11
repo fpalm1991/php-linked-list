@@ -1,13 +1,16 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace LinkedList;
 
-class Node
-{
+class Node {
     public function __construct(private $value, private ?Node $next = null) {}
 
     public function setNext(Node $node): void {
         $this->next = $node;
+    }
+
+    public function unsetNext(): void {
+        $this->next = null;
     }
 
     public function getNext(): ?Node {

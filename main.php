@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -14,10 +14,44 @@ $node1->setNext($node2);
 $node2->setNext($node3);
 
 
-// Advanced implementation
+// 2. Advanced implementation
 $linkedList = new LinkedList();
 
-$linkedList->append(new Node(1))->append(new Node(2))->push(new Node(3));
-$linkedList->print(); // 3 => 1 => 2
-$linkedList->addNodeAfter(new Node(99), 1);
-$linkedList->print(); // 3 => 1 => 99 => 2
+// Add elements at the end with append()
+$linkedList->append(new Node(1))
+    ->append(new Node(2))
+    ->append(new Node(3));
+$linkedList->print(); // 1 => 2 => 3
+
+// Add elements at the beginning with push()
+$linkedList->push(new Node(4));
+$linkedList->print(); // 4 => 1 => 2 => 3
+
+// Add new Node after specific Node in Linked List
+$linkedList
+    ->addNodeAfter(new Node(99), 1)
+    ->addNodeAfter(new Node(101), 0);
+$linkedList->print(); //4 => 101 => 1 => 99 => 2 => 3
+
+// Remove first element with shift()
+$linkedList->shift();
+$linkedList->print(); // 101 => 1 => 99 => 2 => 3
+
+// Remove last element with pop() (returns last Node in Linked List)
+$lastNode = $linkedList->pop();
+print $lastNode . "\n"; // 3
+$linkedList->print(); // 101 => 1 => 99 => 2
+$lastNode = $linkedList->pop();
+print $lastNode . "\n"; // 2
+$linkedList->print(); // 101 => 1 => 99
+
+// Remove node after specific position
+$linkedList
+    ->append(new Node(11))
+    ->append(new Node(12))
+    ->append(new Node(13))
+    ->append(new Node(14));
+$linkedList->print(); // 101 => 1 => 99 => 11 => 12 => 13 => 14
+
+$linkedList->removeNodeAfter(2);
+$linkedList->print(); // 101 => 1 => 99 => 12 => 13 => 14
