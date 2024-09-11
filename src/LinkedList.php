@@ -75,14 +75,7 @@ class LinkedList {
             return $this;
         }
 
-        $nodeAt = $this->head;
-        for ( $i = 0; $i < $position; ++$i ) {
-            $nodeAt = $nodeAt->getNext();
-
-            if ( $nodeAt === null ) {
-                return $this;
-            }
-        }
+        $nodeAt = $this->getNodeAt($position);
 
         $nodeAfter = $this->head;
         for ( $i = 0; $i < $position + 1; ++$i ) {
@@ -165,17 +158,6 @@ class LinkedList {
 
         $nodeAt = $this->getNodeAt($position);
 
-        /*
-        $nodeAt = $this->head;
-        for ( $i = 0; $i < $position; ++$i ) {
-            $nodeAt = $nodeAt->getNext();
-
-            if ( $nodeAt === null ) {
-                return $this;
-            }
-        }
-        */
-
         $nodeAfter = $this->head;
         for ( $i = 0; $i < $position + 1; ++$i ) {
             $nodeAfter = $nodeAfter->getNext();
@@ -186,13 +168,12 @@ class LinkedList {
         }
 
         if ( $nodeAfter->getNext() === null ) {
-            throw new \UnderflowException("Cannot remove since linked list is too short.");
+            return $this;
         }
 
         $nodeAt->setNext($nodeAfter->getNext());
 
         return $this;
     }
-
 
 }
