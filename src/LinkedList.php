@@ -12,6 +12,18 @@ class LinkedList {
         return (string) $this->head ?? "Empty Linked List" . "\n";
     }
 
+    public function getAsArray(): array {
+        $values = [];
+
+        $current = $this->head;
+        while ( $current !== null ) {
+            $values[] = $current->getValue();
+            $current = $current->getNext();
+        }
+
+        return $values;
+    }
+
     private function getNodeAt(int $position): ?Node {
         $nodeAt = $this->head;
 
@@ -70,6 +82,7 @@ class LinkedList {
     // Add Node after specific position in Linked List
     public function addNodeAfter(Node $n, int $position): LinkedList {
 
+        // Empty Linked List
         if ( $this->head === null ) {
             $this->head = $n;
             return $this;
@@ -77,17 +90,18 @@ class LinkedList {
 
         $nodeAt = $this->getNodeAt($position);
 
-        $nodeAfter = $this->head;
-        for ( $i = 0; $i < $position + 1; ++$i ) {
-            $nodeAfter = $nodeAfter->getNext();
-
-            if ( $nodeAfter === null ) {
-                $this->append($n); // Append new node at end of Linked List if there is no other Node after $nodeAt
-                return $this;
-            }
+        if ( $nodeAt === null ) {
+            throw new \UnderflowException("Position not found");
         }
 
+        $nodeAfter = $nodeAt->getNext();
+
         $nodeAt->setNext($n);
+
+        if ( $nodeAfter === null ) {
+            return $this;
+        }
+
         $nodeAt->getNext()->setNext($nodeAfter);
 
         return $this;
@@ -159,14 +173,7 @@ class LinkedList {
 
         $nodeAt = $this->getNodeAt($position);
 
-        $nodeAfter = $this->head;
-        for ( $i = 0; $i < $position + 1; ++$i ) {
-            $nodeAfter = $nodeAfter->getNext();
-
-            if ( $nodeAfter === null ) {
-                return $this;
-            }
-        }
+        $nodeAfter = $nodeAt->getNext();
 
         if ( $nodeAfter->getNext() === null ) {
             return $this;

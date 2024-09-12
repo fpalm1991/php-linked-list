@@ -17,6 +17,10 @@ class Node {
         return $this->next;
     }
 
+    public function getValue(): mixed {
+        return $this->value;
+    }
+
     public function __toString(): string {
         return $this->next ? "$this->value => $this->next" : "$this->value";
     }
